@@ -18,6 +18,6 @@ exports.getTFSItemLinkById = functions.https.onRequest((request, response) => {
 exports.setTFSBaseURL = functions.https.onRequest((request, response) => {
     const { token, text, team_id } = request.body;
     admin.database().ref('/tfs').child(team_id).set({ url: text }).then(snapshot => {
-        response.send("done");
+        response.send({ text: "Done, new url", attachments: [ { text: `<${text}>` } ] });
     });
 });
